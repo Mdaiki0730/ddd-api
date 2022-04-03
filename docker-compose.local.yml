@@ -1,0 +1,16 @@
+version: "3"
+
+services:
+  api:
+    container_name: ddd-api-container
+    build:
+      context: .
+      dockerfile: Dockerfile.local
+    command: "air -c /app/go/base/cmd/.air.toml"
+    image: ddd-api
+    tty: true
+    volumes:
+      - .:/app/go/base:rw
+    ports:
+      - ${REST_PORT}:${REST_PORT}
+      - ${GRPC_PORT}:${GRPC_PORT}
