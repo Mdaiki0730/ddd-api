@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+package proto;
+
+import "sake_message.proto";
+import "pc_message.proto";
+option go_package = "./;protobuf";
+
+
+// req
+message CreatePersonRequest {
+  string person_name                 = 1;
+  string person_email                = 2;
+  PCMessage pc                       = 3;
+  repeated SakeMessage sake          = 4;
+}
+
+message GetPersonRequest {
+  string person_id = 1;
+}
+
+message ListPersonRequest {}
+
+message UpdatePersonRequest {
+  string person_id                   = 1;
+  string person_name                 = 2;
+  string person_email                = 3;
+  PCMessage pc                       = 4;
+  repeated SakeMessage sake          = 5;
+}
+
+message DeletePersonRequest {
+  string person_id = 1;
+}
+
+
+// res
+message PersonBaseResponse {
+  string person_id                   = 1;
+  string person_name                 = 2;
+  string person_email                = 3;
+  PCMessage pc                       = 4;
+  repeated SakeMessage sake          = 5;
+}
+
+message ListPersonResponse {
+  repeated PersonBaseResponse data = 1;
+}
+
+message DeletePersonResponse {}

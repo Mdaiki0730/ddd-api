@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package proto;
+
+option go_package = "./;protobuf";
+
+message SakeMessage {
+  string name     = 1;
+  string percent  = 2;
+  string liquor   = 3;
+}

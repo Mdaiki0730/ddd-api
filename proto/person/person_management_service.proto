@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package proto;
+
+import "google/api/annotations.proto";
+import "person_message.proto";
+
+option go_package = "./;protobuf";
+
+service PersonManagement {
+  rpc Create(CreatePersonRequest) returns (PersonBaseResponse) {
+    option (google.api.http) = {
+      post : "/v1/persons"
+      body : "*"
+    };
+  };
+  rpc Get(GetPersonRequest) returns (PersonBaseResponse) {
+    option (google.api.http) = {
+      get : "/v1/persons/{person_id}"
+    };
+  };
+  rpc List(ListPersonRequest) returns (ListPersonResponse) {
+    option (google.api.http) = {
+      get : "/v1/persons"
+    };
+  };
+  rpc Update(UpdatePersonRequest) returns (PersonBaseResponse) {
+    option (google.api.http) = {
+      patch : "/v1/persons"
+      body : "*"
+    };
+  };
+  rpc Delete(DeletePersonRequest) returns (DeletePersonResponse) {
+    option (google.api.http) = {
+      delete : "/v1/persons"
+    };
+  };
+}
