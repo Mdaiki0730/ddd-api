@@ -26,13 +26,13 @@ service PersonManagement {
   };
   rpc Update(UpdatePersonRequest) returns (PersonBaseResponse) {
     option (google.api.http) = {
-      patch : "/v1/persons"
+      patch : "/v1/persons/{person_id}"
       body : "*"
     };
   };
   rpc Delete(DeletePersonRequest) returns (DeletePersonResponse) {
     option (google.api.http) = {
-      delete : "/v1/persons"
+      delete : "/v1/persons/{person_id}"
     };
   };
 }
