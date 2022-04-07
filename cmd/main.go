@@ -8,7 +8,8 @@ import (
   "net/http"
 
   "api/config"
-  "api/internal/interfaces/server"
+  "api/internal/dependency"
+  "api/internal/interface/server"
   "api/proto/person/protobuf"
 
   "google.golang.org/grpc"
@@ -23,7 +24,8 @@ func init() {
 func main() {
   grpcServer := grpc.NewServer()
 
-  personServer := server.NewPersonManagementServer()
+  personAS := dependency.NewPersonApplicationService(dependency.NewPersonRepository())
+  personServer := server.NewPersonManagementServer(personAS)
   protobuf.RegisterPersonManagementServer(grpcServer, personServer)
 
   reflection.Register(grpcServer)

@@ -4,13 +4,16 @@ import (
   "context"
   "errors"
 
+  "api/internal/application/service"
   "api/proto/person/protobuf"
 )
 
-type personManagementServer struct {}
+type personManagementServer struct {
+  personAS service.PersonApplicationServiceIF
+}
 
-func NewPersonManagementServer() protobuf.PersonManagementServer {
-  return &personManagementServer{}
+func NewPersonManagementServer(personAS service.PersonApplicationServiceIF) protobuf.PersonManagementServer {
+  return &personManagementServer{personAS}
 }
 
 
