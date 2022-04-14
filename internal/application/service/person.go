@@ -30,7 +30,8 @@ func (personAS *PersonApplicationService) Create(ctx context.Context, cmd comman
   // create person instance
   person := model.NewPerson(cmd)
 
-  if err := personAS.personRepository.InsertOne(ctx, person); err != nil {
+  err := personAS.personRepository.InsertOne(ctx, person)
+  if err != nil {
     return nil, err
   }
 
