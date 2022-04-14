@@ -20,4 +20,4 @@ watch-log:
 
 .PHONY: gen-proto
 gen-proto:
-	@sh ./bin/gen-proto.sh
+	@sh ./scripts/gen-proto.sh
