@@ -41,6 +41,7 @@ message PersonBaseResponse {
   string person_email                = 3;
   PCMessage pc                       = 4;
   repeated SakeMessage sake          = 5;
+  string state                       = 6;
 }
 
 message ListPersonResponse {

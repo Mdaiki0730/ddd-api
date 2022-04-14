@@ -3,9 +3,10 @@ package server
 import (
 	"context"
 	"errors"
-	"fmt"
 
 	"api/internal/application/service"
+  "api/internal/application/command"
+  "api/pkg/jsonutil"
 	"api/proto/person/protobuf"
 )
 
@@ -18,10 +19,17 @@ func NewPersonManagementServer(personAS service.PersonApplicationServiceIF) prot
 }
 
 func (server *personManagementServer) Create(ctx context.Context, req *protobuf.CreatePersonRequest) (*protobuf.PersonBaseResponse, error) {
-	fmt.Printf("value: %v, type: %T", req, req)
+  cmd := command.PersonCommand{}
+  jsonutil.DataTransfer(req, &cmd)
 
-	// server.personAS.Create(ctx, cmd)
-	return nil, errors.New("method Create not implemented")
+	result, err := server.personAS.Create(ctx, cmd)
+  if err != nil {
+    return nil, err
+  }
+
+  res := &protobuf.PersonBaseResponse{}
+  jsonutil.DataTransfer(result, res)
+	return res, nil
 }
 func (server *personManagementServer) Get(context.Context, *protobuf.GetPersonRequest) (*protobuf.PersonBaseResponse, error) {
 	return nil, errors.New("method Get not implemented")
