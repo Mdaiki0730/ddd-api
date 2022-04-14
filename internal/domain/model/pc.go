@@ -1,13 +1,13 @@
 package model
 
 import (
-  "api/internal/application/command"
+	"api/internal/application/command"
 )
 
 type PC struct {
-  Model string
+	Model string
 }
 
 func NewPC(cmd command.PCCommand) *PC {
-  return &PC{cmd.Model}
+	return &PC{cmd.Model}
 }

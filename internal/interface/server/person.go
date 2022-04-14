@@ -1,23 +1,26 @@
 package server
 
 import (
-  "context"
-  "errors"
+	"context"
+	"errors"
+	"fmt"
 
-  "api/internal/application/service"
-  "api/proto/person/protobuf"
+	"api/internal/application/service"
+	"api/proto/person/protobuf"
 )
 
 type personManagementServer struct {
-  personAS service.PersonApplicationServiceIF
+	personAS service.PersonApplicationServiceIF
 }
 
 func NewPersonManagementServer(personAS service.PersonApplicationServiceIF) protobuf.PersonManagementServer {
-  return &personManagementServer{personAS}
+	return &personManagementServer{personAS}
 }
 
+func (server *personManagementServer) Create(ctx context.Context, req *protobuf.CreatePersonRequest) (*protobuf.PersonBaseResponse, error) {
+	fmt.Printf("value: %v, type: %T", req, req)
 
-func (server *personManagementServer) Create(context.Context, *protobuf.CreatePersonRequest) (*protobuf.PersonBaseResponse, error) {
+	// server.personAS.Create(ctx, cmd)
 	return nil, errors.New("method Create not implemented")
 }
 func (server *personManagementServer) Get(context.Context, *protobuf.GetPersonRequest) (*protobuf.PersonBaseResponse, error) {
